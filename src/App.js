@@ -1,5 +1,5 @@
 import Todo from "./components/Todo";
-import "./index";
+import "./App.css";
 
 export default function App() {
   return (
