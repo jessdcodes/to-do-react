@@ -32,10 +32,6 @@ function Todo(props) {
   }
 
   function handleTickChange(id) {
-    (tickRef.current[id].checked) ? 
-      taskRef.current[id].style.textDecoration = "line-through" :
-      taskRef.current[id].style.textDecoration = "none";
-
     dispatch(updateTaskStatus(id, tickRef.current[id].checked));
   }
 
@@ -57,12 +53,15 @@ function Todo(props) {
               <input 
                 type="checkbox" 
                 ref={(el) => (tickRef.current[task.id] = el)} 
-                defaultChecked={task.isDone}
+                defaultChecked={task.isCompleted}
                 onChange={() => handleTickChange(task.id)}/>
               <input
                 ref={(el) => (taskRef.current[task.id] = el)}
                 disabled={true}
                 defaultValue={task.taskName}
+                style={{
+                    textDecoration: task.isCompleted ? "line-through" : "none"
+                  }}
               ></input>
               <button onClick={() => handleEdit(task.id)}>Edit</button>
               <button onClick={() => handleRemove(task.id)}>Remove</button>
@@ -74,10 +73,5 @@ function Todo(props) {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     list: state.taskList
-//   };
-// };
 
 export default Todo;
