@@ -2,6 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTask, removeTask, updateTask, updateTaskStatus } from "../actions/listActions";
 import React, { useRef } from "react";
 import TodoDisplayButtons from "../components/TodoDisplayButtons";
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  paper: {
+    padding: 30,
+    margin: 'auto',
+    maxWidth: 400
+  }
+};
 
 function Todo(props) {
   const dispatch = useDispatch();
@@ -37,41 +48,49 @@ function Todo(props) {
 
   return (
     <div>
-      <input ref={inputRef} name="newTask"></input>
-      <button onClick={handleAdd}>Add</button>
+      <Paper className={props.classes.paper}>
+        <Grid container spacing={12}>
+          <Grid item xs>
+            <TodoDisplayButtons/>
 
-      <TodoDisplayButtons/>
-     
-      <p>Tasks</p>
-      <ul>
-        {
-          tasks.filter(
-            (task) => displaySetting!=null ? task.isCompleted === displaySetting : task
-          ).map((task) => {
-          return (
-            <li key={task.id}>
-              <input 
-                type="checkbox" 
-                ref={(el) => (tickRef.current[task.id] = el)} 
-                defaultChecked={task.isCompleted}
-                onChange={() => handleTickChange(task.id)}/>
-              <input
-                ref={(el) => (taskRef.current[task.id] = el)}
-                disabled={true}
-                defaultValue={task.taskName}
-                style={{
-                    textDecoration: task.isCompleted ? "line-through" : "none"
-                  }}
-              ></input>
-              <button onClick={() => handleEdit(task.id)}>Edit</button>
-              <button onClick={() => handleRemove(task.id)}>Remove</button>
-            </li>
-          );
-        })}
-      </ul>
+            <input ref={inputRef} name="newTask"></input>
+            <button onClick={handleAdd}>Add</button>
+
+            <ul>
+              {
+                tasks.filter(
+                  (task) => displaySetting!=null ? task.isCompleted === displaySetting : task
+                ).map((task) => {
+                return (
+                  <li key={task.id}>
+                    <input 
+                      type="checkbox" 
+                      ref={(el) => (tickRef.current[task.id] = el)} 
+                      defaultChecked={task.isCompleted}
+                      onChange={() => handleTickChange(task.id)}/>
+                    <input
+                      ref={(el) => (taskRef.current[task.id] = el)}
+                      disabled={true}
+                      defaultValue={task.taskName}
+                      style={{
+                          textDecoration: task.isCompleted ? "line-through" : "none"
+                        }}
+                    ></input>
+                    <button onClick={() => handleEdit(task.id)}>Edit</button>
+                    <button onClick={() => handleRemove(task.id)}>Remove</button>
+                  </li>
+                );
+              })}
+            </ul>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      
+      
     </div>
   );
 }
 
 
-export default Todo;
+export default withStyles(styles)(Todo);

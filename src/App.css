@@ -3,6 +3,14 @@
   text-align: center;
 }
 
+#todo-title, #todo-desc {
+  color: white;
+}
+
 ul {
   list-style-type: none;
+}
+
+body {
+  background-color:rgb(9, 105, 250);
 }

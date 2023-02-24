@@ -4,8 +4,8 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      <h1>To-Do List</h1>
-      <h2>What needs to be done?</h2>
+      <h3 id="todo-title">To-Do List</h3>
+      <p id="todo-desc">What needs to be done?</p>
       <Todo />
     </div>
   );
