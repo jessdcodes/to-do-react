@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import TodoDisplayButtons from "../components/TodoDisplayButtons";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
@@ -52,8 +53,8 @@ function Todo(props) {
         <Grid container spacing={12}>
           <Grid item xs>
             <TodoDisplayButtons/>
-
-            <input ref={inputRef} name="newTask"></input>
+            {/* <Input placeholder="Placeholder" /> */}
+            <Input inputRef={inputRef} name="newTask" variant="filled" size="small"/>
             <button onClick={handleAdd}>Add</button>
 
             <ul>
@@ -63,19 +64,19 @@ function Todo(props) {
                 ).map((task) => {
                 return (
                   <li key={task.id}>
-                    <input 
+                    <Input 
                       type="checkbox" 
-                      ref={(el) => (tickRef.current[task.id] = el)} 
+                      inputRef={(el) => (tickRef.current[task.id] = el)} 
                       defaultChecked={task.isCompleted}
                       onChange={() => handleTickChange(task.id)}/>
-                    <input
-                      ref={(el) => (taskRef.current[task.id] = el)}
+                    <Input
+                      inputRef={(el) => (taskRef.current[task.id] = el)}
                       disabled={true}
                       defaultValue={task.taskName}
                       style={{
                           textDecoration: task.isCompleted ? "line-through" : "none"
                         }}
-                    ></input>
+                    />
                     <button onClick={() => handleEdit(task.id)}>Edit</button>
                     <button onClick={() => handleRemove(task.id)}>Remove</button>
                   </li>
