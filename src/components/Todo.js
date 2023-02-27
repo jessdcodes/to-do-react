@@ -5,13 +5,25 @@ import TodoDisplayButtons from "../components/TodoDisplayButtons";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
+import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import EditIcon from '@mui/icons-material/Edit';
 
 const styles = {
   paper: {
     padding: 30,
     margin: 'auto',
     maxWidth: 400
+  },
+  taskBtn: {
+    height:30,
+    width:100
+  },
+  editBtn: {
+    height:30,
+    width:70
   }
 };
 
@@ -77,8 +89,8 @@ function Todo(props) {
                           textDecoration: task.isCompleted ? "line-through" : "none"
                         }}
                     />
-                    <button onClick={() => handleEdit(task.id)}>Edit</button>
-                    <button onClick={() => handleRemove(task.id)}>Remove</button>
+                    <Button onClick={() => handleEdit(task.id)} className={props.classes.editBtn} variant="outlined" startIcon={<EditIcon />}>Edit</Button>
+                    <Button onClick={() => handleRemove(task.id) } className={props.classes.taskBtn} variant="outlined" startIcon={<DeleteIcon />} >Remove</Button>
                   </li>
                 );
               })}
