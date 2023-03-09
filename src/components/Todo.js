@@ -10,6 +10,8 @@ import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import EditIcon from '@mui/icons-material/Edit';
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@mui/icons-material/Add";
 
 const styles = {
   paper: {
@@ -67,7 +69,9 @@ function Todo(props) {
             <TodoDisplayButtons/>
             {/* <Input placeholder="Placeholder" /> */}
             <Input inputRef={inputRef} name="newTask" variant="filled" size="small"/>
-            <button onClick={handleAdd}>Add</button>
+            <IconButton onClick={handleAdd} color="primary">
+              <AddIcon />
+            </IconButton>
 
             <ul>
               {
@@ -89,8 +93,12 @@ function Todo(props) {
                           textDecoration: task.isCompleted ? "line-through" : "none"
                         }}
                     />
-                    <Button onClick={() => handleEdit(task.id)} className={props.classes.editBtn} variant="outlined" startIcon={<EditIcon />}>Edit</Button>
-                    <Button onClick={() => handleRemove(task.id) } className={props.classes.taskBtn} variant="outlined" startIcon={<DeleteIcon />} >Remove</Button>
+                    <IconButton onClick={() => handleEdit(task.id)} variant="outlined">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleRemove(task.id)} variant="outlined">
+                      <DeleteIcon />
+                    </IconButton>
                   </li>
                 );
               })}
