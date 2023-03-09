@@ -19,7 +19,7 @@ const styles = {
     margin: 'auto',
     maxWidth: 400
   },
-  disabledButton: {
+  disabledInput: {
     color: "black"
   }
 };
@@ -35,6 +35,7 @@ function Todo(props) {
 
   function handleAdd() {
     dispatch(addTask(inputRef.current.value));
+    inputRef.current.value = "";
   }
 
   function handleRemove(id) {
@@ -83,7 +84,7 @@ function Todo(props) {
                     <Input
                       inputRef={(el) => (taskRef.current[task.id] = el)}
                       disabled={true}
-                      classes={{ disabled: props.classes.disabledButton }}
+                      classes={{ disabled: props.classes.disabledInput }}
                       defaultValue={task.taskName}
                       style={{
                           textDecoration: task.isCompleted ? "line-through" : "none"
