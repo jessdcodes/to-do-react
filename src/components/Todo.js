@@ -19,13 +19,8 @@ const styles = {
     margin: 'auto',
     maxWidth: 400
   },
-  taskBtn: {
-    height:30,
-    width:100
-  },
-  editBtn: {
-    height:30,
-    width:70
+  disabledButton: {
+    color: "black"
   }
 };
 
@@ -88,6 +83,7 @@ function Todo(props) {
                     <Input
                       inputRef={(el) => (taskRef.current[task.id] = el)}
                       disabled={true}
+                      classes={{ disabled: props.classes.disabledButton }}
                       defaultValue={task.taskName}
                       style={{
                           textDecoration: task.isCompleted ? "line-through" : "none"
