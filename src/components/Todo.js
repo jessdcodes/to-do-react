@@ -76,9 +76,9 @@ function Todo(props) {
                 ).map((task) => {
                 return (
                   <li key={task.id}>
-                    <Input 
+                    <input 
                       type="checkbox" 
-                      inputRef={(el) => (tickRef.current[task.id] = el)} 
+                      ref={(el) => (tickRef.current[task.id] = el)} 
                       defaultChecked={task.isCompleted}
                       onChange={() => handleTickChange(task.id)}/>
                     <Input
