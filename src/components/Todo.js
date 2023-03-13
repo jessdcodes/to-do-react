@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, removeTask, updateTask, updateTaskStatus } from "../actions/listActions";
+import { addTask, removeTask, updateTask, updateTaskStatus, updateInputDisabled } from "../actions/listActions";
 import React, { useRef } from "react";
 import TodoDisplayButtons from "../components/TodoDisplayButtons";
 import Grid from '@material-ui/core/Grid';
@@ -19,8 +19,12 @@ const styles = {
     margin: 'auto',
     maxWidth: 400
   },
-  disabledInput: {
-    color: "black"
+  taskInput: {
+    color: "blue",
+    marginRight: 8,
+    "& .MuiInputBase-input.Mui-disabled": {
+      color: "black" // (default alpha is 0.38)
+    }
   }
 };
 
@@ -45,11 +49,11 @@ function Todo(props) {
   function handleEdit(id) {
     const isDisabled = taskRef.current[id].disabled;
 
-    if (isDisabled) taskRef.current[id].disabled = false;
+    if (isDisabled) dispatch(updateInputDisabled(id, false));
     else {
       const newValue = taskRef.current[id].value;
       dispatch(updateTask(id, newValue));
-      taskRef.current[id].disabled = true;
+      dispatch(updateInputDisabled(id, true));
     }
   }
 
@@ -83,8 +87,8 @@ function Todo(props) {
                       onChange={() => handleTickChange(task.id)}/>
                     <Input
                       inputRef={(el) => (taskRef.current[task.id] = el)}
-                      disabled={true}
-                      classes={{ disabled: props.classes.disabledInput }}
+                      disabled={task.isDisabled}
+                      className={props.classes.taskInput}
                       defaultValue={task.taskName}
                       style={{
                           textDecoration: task.isCompleted ? "line-through" : "none"
