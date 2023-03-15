@@ -64,22 +64,24 @@ function Todo(props) {
   return (
     <div>
       <Paper className={props.classes.paper}>
-        <Grid container spacing={12}>
-          <Grid item xs>
+        <Grid container rowSpacing={1} justifyContent="center">
+          <Grid item xs md={12}>
             <TodoDisplayButtons/>
-            {/* <Input placeholder="Placeholder" /> */}
+          </Grid>
+          <Grid item xs md={12}>
             <Input inputRef={inputRef} name="newTask" variant="filled" size="small"/>
             <IconButton onClick={handleAdd} color="primary">
               <AddIcon />
             </IconButton>
-
+          </Grid>
+          <Grid item xs md={12}>
             <ul>
               {
                 tasks.filter(
                   (task) => displaySetting!=null ? task.isCompleted === displaySetting : task
                 ).map((task) => {
                 return (
-                  <li key={task.id}>
+                  <li key={task.id} className={props.classes.taskContainer}>
                     <input 
                       type="checkbox" 
                       ref={(el) => (tickRef.current[task.id] = el)} 
