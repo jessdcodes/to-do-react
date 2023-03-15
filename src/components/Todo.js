@@ -19,6 +19,9 @@ const styles = {
     margin: 'auto',
     maxWidth: 400
   },
+  row: {
+    flexBasis: '100%'
+  },
   taskInput: {
     color: "blue",
     marginRight: 8,
@@ -64,11 +67,11 @@ function Todo(props) {
   return (
     <div>
       <Paper className={props.classes.paper}>
-        <Grid container rowSpacing={1} justifyContent="center">
-          <Grid item xs md={12}>
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs md={12} className={props.classes.row}>
             <TodoDisplayButtons/>
           </Grid>
-          <Grid item xs md={12}>
+          <Grid item xs md={12} className={props.classes.row}>
             <Input inputRef={inputRef} name="newTask" variant="filled" size="small"/>
             <IconButton onClick={handleAdd} color="primary">
               <AddIcon />
